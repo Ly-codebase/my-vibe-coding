@@ -1,10 +1,11 @@
 import { readFile, writeFile, mkdir } from "fs/promises";
 import path from "path";
-import { head, put } from "@vercel/blob";
+import { get, put } from "@vercel/blob";
 import type { PortfolioData } from "@/types/portfolio";
 import seedData from "../../data/portfolio.json";
 
 const BLOB_PATHNAME = "portfolio/data.json";
+const BLOB_ACCESS = "private" as const;
 const LOCAL_DATA_PATH = path.join(process.cwd(), "data", "portfolio.json");
 
 function withUpdatedTimestamp(data: PortfolioData): PortfolioData {
@@ -23,13 +24,11 @@ async function readFromBlob(): Promise<PortfolioData | null> {
   if (!hasBlobStorage()) return null;
 
   try {
-    const blobMeta = await head(BLOB_PATHNAME);
-    if (!blobMeta) return null;
+    const result = await get(BLOB_PATHNAME, { access: BLOB_ACCESS });
+    if (!result || result.statusCode !== 200 || !result.stream) return null;
 
-    const response = await fetch(blobMeta.url, { cache: "no-store" });
-    if (!response.ok) return null;
-
-    return (await response.json()) as PortfolioData;
+    const text = await new Response(result.stream).text();
+    return JSON.parse(text) as PortfolioData;
   } catch {
     return null;
   }
@@ -41,7 +40,7 @@ async function writeToBlob(data: PortfolioData): Promise<void> {
   }
 
   await put(BLOB_PATHNAME, JSON.stringify(data, null, 2), {
-    access: "public",
+    access: BLOB_ACCESS,
     addRandomSuffix: false,
     allowOverwrite: true,
     contentType: "application/json",
