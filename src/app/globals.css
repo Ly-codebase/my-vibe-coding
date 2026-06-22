@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050510;
+  --foreground: #f4f4f5;
+  --accent-cyan: #00f5ff;
+  --accent-violet: #8b5cf6;
+  --accent-pink: #f472b6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050510;
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(0, 245, 255, 0.25);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00f5ff 0%, #8b5cf6 50%, #f472b6 100%);
+  }
+
+  .glass {
+    @apply border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06];
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.15), 0 0 80px rgba(139, 92, 246, 0.1);
+  }
+
+  .bg-prism-base {
+    background:
+      radial-gradient(ellipse 100% 80% at 50% 0%, #1a1035 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 100% 50%, rgba(6, 78, 120, 0.25) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 0% 80%, rgba(88, 28, 135, 0.2) 0%, transparent 50%),
+      linear-gradient(165deg, #0a0818 0%, #070712 45%, #0c0a16 100%);
+  }
+
+  .bg-prism-mesh {
+    background:
+      radial-gradient(at 30% 20%, rgba(0, 245, 255, 0.08) 0%, transparent 45%),
+      radial-gradient(at 70% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 45%),
+      radial-gradient(at 50% 70%, rgba(244, 114, 182, 0.06) 0%, transparent 45%);
+    background-size: 200% 200%;
+    animation: mesh-drift 24s ease-in-out infinite;
+  }
+
+  .bg-prism-conic {
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(0, 245, 255, 0.35) 0deg,
+      rgba(139, 92, 246, 0.3) 90deg,
+      rgba(244, 114, 182, 0.25) 180deg,
+      rgba(163, 230, 53, 0.15) 270deg,
+      rgba(0, 245, 255, 0.35) 360deg
+    );
+  }
+
+  .beam {
+    opacity: 0.07;
+    mix-blend-mode: screen;
+  }
+
+  .beam-1 {
+    background: linear-gradient(
+      115deg,
+      transparent 38%,
+      rgba(0, 245, 255, 0.6) 49.5%,
+      rgba(0, 245, 255, 0.6) 50.5%,
+      transparent 62%
+    );
+    animation: beam-slide-1 12s ease-in-out infinite;
+  }
+
+  .beam-2 {
+    background: linear-gradient(
+      65deg,
+      transparent 42%,
+      rgba(139, 92, 246, 0.5) 49.8%,
+      rgba(139, 92, 246, 0.5) 50.2%,
+      transparent 58%
+    );
+    animation: beam-slide-2 16s ease-in-out infinite;
+  }
+
+  .beam-3 {
+    background: linear-gradient(
+      -30deg,
+      transparent 55%,
+      rgba(244, 114, 182, 0.4) 49.9%,
+      rgba(244, 114, 182, 0.4) 50.1%,
+      transparent 65%
+    );
+    animation: beam-slide-3 20s ease-in-out infinite;
+  }
+
+  .glow-corner {
+    opacity: 0.5;
+  }
+
+  .glow-tl {
+    background: radial-gradient(circle at 0% 0%, rgba(0, 245, 255, 0.12) 0%, transparent 70%);
+  }
+
+  .glow-br {
+    background: radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  }
+}
+
+@keyframes mesh-drift {
+  0%, 100% { background-position: 0% 0%; }
+  33% { background-position: 100% 50%; }
+  66% { background-position: 50% 100%; }
+}
+
+@keyframes beam-slide-1 {
+  0%, 100% { transform: translateX(-3%) translateY(0); opacity: 0.05; }
+  50% { transform: translateX(3%) translateY(2%); opacity: 0.1; }
+}
+
+@keyframes beam-slide-2 {
+  0%, 100% { transform: translateX(2%) translateY(-1%); opacity: 0.04; }
+  50% { transform: translateX(-2%) translateY(1%); opacity: 0.09; }
+}
+
+@keyframes beam-slide-3 {
+  0%, 100% { transform: translateX(0) translateY(2%); opacity: 0.03; }
+  50% { transform: translateX(-1%) translateY(-2%); opacity: 0.08; }
+}

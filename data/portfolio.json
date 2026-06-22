@@ -1,0 +1,89 @@
+{
+  "profile": {
+    "name": "Louie Lu",
+    "title": "Vibe Coder",
+    "tagline": "用代码表达直觉，用作品传递氛围",
+    "bio": "我是一名热爱创造的开发者，专注于 Vibe Coding —— 在直觉与逻辑之间找到平衡，用现代技术栈打造有灵魂的数字体验。每一个项目都是一次探索，每一次提交都是一段故事。",
+    "avatarUrl": "https://api.dicebear.com/7.x/shapes/svg?seed=LouieLu&backgroundColor=0a0a0f",
+    "location": "Earth",
+    "email": "louis.lu.yi@outlook.com",
+    "social": {
+      "github": "https://github.com",
+      "twitter": "https://twitter.com",
+      "website": "https://louielu.dev"
+    },
+    "skills": [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+      "AI / LLM",
+      "Creative Coding",
+      "Full-Stack"
+    ]
+  },
+  "projects": [
+    {
+      "id": "proj-001",
+      "title": "Travel Tracker Map",
+      "tagline": "中国省份打卡地图",
+      "description": "基于 WebGL 与 AI 的交互式生成艺术平台，用户可以通过自然语言描述生成独特的视觉作品，支持实时参数调节与导出。",
+      "tags": [
+        "AI",
+        "Creative Coding"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop",
+      "demoUrl": "https://ly-codebase.github.io/travel_map/",
+      "repoUrl": "https://github.com/Ly-codebase/travel_map.git",
+      "featured": true,
+      "createdAt": "2025-12-01"
+    },
+    {
+      "id": "proj-002",
+      "title": "Pulse Dashboard",
+      "tagline": "极简数据脉搏监控",
+      "description": "为独立开发者设计的轻量级监控面板，实时追踪 API 健康度、用户活跃与系统性能，界面采用暗色玻璃拟态风格。",
+      "tags": [
+        "Dashboard",
+        "Analytics",
+        "SaaS"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      "demoUrl": "https://example.com",
+      "featured": true,
+      "createdAt": "2025-10-15"
+    },
+    {
+      "id": "proj-003",
+      "title": "Echo Notes",
+      "tagline": "语音驱动的智能笔记",
+      "description": "说话即可记录，AI 自动整理结构、提取要点并生成待办。支持 Markdown 导出与多端同步。",
+      "tags": [
+        "AI",
+        "Productivity",
+        "Voice"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
+      "repoUrl": "https://github.com",
+      "featured": false,
+      "createdAt": "2025-08-20"
+    },
+    {
+      "id": "proj-004",
+      "title": "Flux Commerce",
+      "tagline": "氛围感电商体验",
+      "description": "突破传统电商模板，以沉浸式滚动叙事与微交互重新定义购物体验，集成 Stripe 支付与库存管理。",
+      "tags": [
+        "E-commerce",
+        "Next.js",
+        "Stripe"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1441986300917-6469bd4d0b61?w=800&h=600&fit=crop",
+      "demoUrl": "https://example.com",
+      "featured": false,
+      "createdAt": "2025-06-01"
+    }
+  ],
+  "updatedAt": "2026-06-22T05:57:58.369Z"
+}
