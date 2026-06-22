@@ -32,6 +32,8 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(saved);
   } catch (error) {
     console.error("Failed to save portfolio:", error);
-    return NextResponse.json({ error: "Failed to save portfolio data" }, { status: 500 });
+    const message =
+      error instanceof Error ? error.message : "Failed to save portfolio data";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

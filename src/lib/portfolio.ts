@@ -14,8 +14,13 @@ function withUpdatedTimestamp(data: PortfolioData): PortfolioData {
   };
 }
 
+/** Vercel Blob: OIDC (BLOB_STORE_ID) or legacy token (BLOB_READ_WRITE_TOKEN) */
+function hasBlobStorage(): boolean {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
+}
+
 async function readFromBlob(): Promise<PortfolioData | null> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
+  if (!hasBlobStorage()) return null;
 
   try {
     const blobMeta = await head(BLOB_PATHNAME);
@@ -31,13 +36,14 @@ async function readFromBlob(): Promise<PortfolioData | null> {
 }
 
 async function writeToBlob(data: PortfolioData): Promise<void> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    throw new Error("BLOB_READ_WRITE_TOKEN is not configured");
+  if (!hasBlobStorage()) {
+    throw new Error("BLOB_NOT_CONFIGURED: 请在 Vercel 项目中连接 Blob Store 并重新部署");
   }
 
   await put(BLOB_PATHNAME, JSON.stringify(data, null, 2), {
     access: "public",
     addRandomSuffix: false,
+    allowOverwrite: true,
     contentType: "application/json",
   });
 }
@@ -65,10 +71,17 @@ export async function getPortfolioData(): Promise<PortfolioData> {
 
 export async function savePortfolioData(data: PortfolioData): Promise<PortfolioData> {
   const payload = withUpdatedTimestamp(data);
+  const isVercel = Boolean(process.env.VERCEL);
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  if (hasBlobStorage()) {
     await writeToBlob(payload);
     return payload;
+  }
+
+  if (isVercel) {
+    throw new Error(
+      "BLOB_NOT_CONFIGURED: 请在 Vercel 项目中连接 Blob Store 并重新部署"
+    );
   }
 
   await writeToLocalFile(payload);

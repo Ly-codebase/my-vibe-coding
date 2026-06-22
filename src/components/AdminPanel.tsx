@@ -83,6 +83,9 @@ export default function AdminPanel() {
 
       if (!res.ok) {
         const err = await res.json();
+        if (res.status === 401) {
+          throw new Error("密码错误，请检查 ADMIN_PASSWORD 环境变量");
+        }
         throw new Error(err.error || "保存失败");
       }
 
