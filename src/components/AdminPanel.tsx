@@ -170,7 +170,7 @@ export default function AdminPanel() {
           />
 
           <p className="mt-2 text-xs text-white/30">
-            本地开发默认密码: admin · 生产环境请设置 ADMIN_PASSWORD 环境变量
+            
           </p>
 
           <button
